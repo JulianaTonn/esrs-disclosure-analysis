@@ -1,0 +1,2 @@
+.venv\Scripts\Activate ### to activate the virtual environment
+!pip freeze > requirements.txt ### actualize the requirements file
