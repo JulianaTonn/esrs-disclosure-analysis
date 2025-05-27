@@ -2,3 +2,34 @@
 source myEnv/bin/activate ### activate ve in the cluster
 !pip freeze > requirements.txt ### actualize the requirements file
 pip install -r requirements.txt ### keeping the environment updated
+
+### working with git
+# working with files
+git status               # Check status of working directory
+git add <file>           # Stage a specific file
+git add .                # Stage all changes
+git commit -m "message"  # Commit staged changes
+git restore <file>       # Discard local changes to a file
+git restore --staged <file> # Unstage a file
+git rm <file>            # Remove a file and stage the deletion
+git rm -r <folder>       # Remove a folder recursively
+git rm -r --cached <folder> # Stop tracking a folder, but keep it locally
+
+# sync with remote
+git remote -v            # Show remote URLs
+git fetch                # Fetch changes from remote
+git pull                 # Pull and merge changes from remote
+git pull --tags origin main  # Pull remote tags and main branch
+git push                 # Push changes to remote
+git push -u origin <branch> # Push and set upstream tracking
+
+# conflict resolution
+git status               # Check for conflicts
+git add <file>           # Mark file as resolved after manual fix
+git commit               # Finalize merge resolution
+git checkout --ours <file>    # Keep your version during conflict
+git checkout --theirs <file>  # Keep remote version during conflict
+
+# clean up
+git clean -f             # Remove untracked files
+git clean -fd            # Remove untracked files and directories
