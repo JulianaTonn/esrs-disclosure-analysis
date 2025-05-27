@@ -1,5 +1,14 @@
 *.csv
-.venv/
 *.xlsx
 *.pdf
 .env
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore Python cache files
+__pycache__/
+
+# Ignore virtual environments in the cluster and local
+myEnv/
+.venv/
