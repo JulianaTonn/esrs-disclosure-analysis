@@ -1,4 +1,3 @@
-*.pdf
 .env
 
 # Ignore Jupyter notebook checkpoints
