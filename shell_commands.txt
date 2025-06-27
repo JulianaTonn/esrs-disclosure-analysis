@@ -1,6 +1,6 @@
 .venv\Scripts\Activate ### to activate the virtual environment in VSC
-source myEnv/bin/activate ### activate ve in the cluster
-!pip freeze > requirements.txt ### actualize the requirements file
+source myEnv_thesis/bin/activate ### activate ve in the cluster
+pip freeze > requirements.txt ### actualize the requirements file
 pip install -r requirements.txt ### keeping the environment updated
 
 ### working with git
