@@ -2,6 +2,7 @@
 source myEnv_thesis/bin/activate ### activate ve in the cluster
 pip freeze > requirements.txt ### actualize the requirements file
 pip install -r requirements.txt ### keeping the environment updated
+watch -n 0.5 nvidia-smi ### show memory usage, GPU utilization and temperature of GPU
 
 ### working with git
 # working with files
