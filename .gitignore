@@ -9,3 +9,6 @@ __pycache__/
 # Ignore virtual environments in the cluster and local
 myEnv/
 .venv/
+
+# Ignore FAISS databases
+exploration/faiss_db_*/
