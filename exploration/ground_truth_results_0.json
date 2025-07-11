@@ -1,0 +1,62 @@
+[
+  {
+    "S1_A": {
+      "ANALYSIS": "The disclosure provided by Continental AG in their 2024 Annual Report regarding the management and disclosure of material impacts, risks, and opportunities related to their own workforce is quite comprehensive. The report covers various aspects such as risks, opportunities, actions taken, and workforce development. However, there is room for improvement in providing more specific details on outcomes and metrics to enhance transparency and accountability.",
+      "SCORE": 85
+    },
+    "S1_B": {
+      "ANALYSIS": "The disclosure provided in the sustainability report partially addresses the material risks and opportunities related to the company's impacts and dependencies on its own workforce. The report identifies various risks and opportunities related to workforce impacts, but lacks specific details on actions planned to mitigate risks, track effectiveness, and address vulnerable groups within the workforce. While some management approaches are described, a more comprehensive approach is needed to effectively manage impacts on the entire workforce.",
+      "SCORE": 70
+    },
+    "S1_C": {
+      "ANALYSIS": "The disclosure provided by Continental in their sustainability report demonstrates a strong commitment to respecting human rights, including labor rights, within their own workforce. They have addressed key aspects such as labor standards, human rights policies, alignment with international standards, and prevention of severe human rights incidents. The report provides details on the company's human rights due diligence process, engagement with employees, and commitment to social excellence in the supply chain. However, specific information on identified cases of severe human rights incidents and the reconciliation of fines or penalties related to those incidents is lacking. Overall, Continental's disclosure is comprehensive but could benefit from more specific information on incidents and reconciliations.",
+      "SCORE": 90
+    },
+    "S1_D": {
+      "ANALYSIS": "The disclosure provided by the company partially meets the requirements for engagement with its workers and workers' representatives. The company describes various engagement initiatives and communication channels with employees and their representatives. However, specific details on frequency, effectiveness assessment, engagement with vulnerable groups, and setting targets with workers' input are lacking. While some aspects are addressed, more comprehensive information is needed to fully meet the disclosure requirements.",
+      "SCORE": 65
+    },
+    "S1_E": {
+      "ANALYSIS": "The disclosure provided by Continental AG extensively covers its policies and actions related to preventing discrimination and promoting diversity and inclusion in its workforce. The company addresses specific policies, commitments for vulnerable groups, implementation procedures, and monitoring mechanisms. It includes targets for gender diversity and initiatives for promoting diversity. However, there is limited information on fines, penalties, or compensation related to discrimination incidents, which could enhance the completeness of the disclosure.",
+      "SCORE": 90
+    },
+    "S1_F": {
+      "ANALYSIS": "The disclosure provided in the sustainability report partially addresses the requirements for remediation of negative impacts and channels for own workforce to raise concerns. The report mentions some actions taken, channels available, and monitoring processes, but lacks specific details on grievance mechanisms, protection against retaliation, and effectiveness assessment of the channels. While there are mentions of engagement with workers, more clarity on the actual processes and policies is needed to fully meet the disclosure requirements.",
+      "SCORE": 65
+    },
+    "S1_G": {
+      "ANALYSIS": "The disclosure provided in the sustainability report lacks specific details on how the company protects its workforce through social protection mechanisms. While there are mentions of social security contributions and employee benefits, the report does not explicitly address the coverage of social protection against major life events for all employees. The information provided is more focused on financial aspects and benefits rather than a comprehensive overview of social protection measures for the entire workforce.",
+      "SCORE": 40
+    }
+  },
+  {
+    "S1_A": {
+      "ANALYSIS": "The disclosure provided by Schneider Electric in their sustainability report regarding the management and disclosure of material impacts, risks, and opportunities related to their own workforce is quite comprehensive. The report covers various aspects such as working conditions, mental health, training, and skills development. However, there is room for improvement in providing more specific details on outcomes and metrics to enhance transparency and accountability.",
+      "SCORE": 85
+    },
+    "S1_B": {
+      "ANALYSIS": "The disclosure provided in the sustainability report partially addresses the material risks and opportunities related to the company's impacts and dependencies on its own workforce. While the report identifies various risks and opportunities related to workforce impacts, it lacks specific details on actions planned to mitigate risks, track effectiveness, and address vulnerable groups within the workforce. The report could benefit from a more comprehensive approach to managing impacts on the entire workforce.",
+      "SCORE": 70
+    },
+    "S1_C": {
+      "ANALYSIS": "The disclosure provided by Schneider Electric in their sustainability report demonstrates a strong commitment to respecting human rights, including labor rights, within their own workforce. They have addressed key aspects such as labor standards, human rights policies, alignment with international standards, and prevention of severe human rights incidents. The report provides details on the company's human rights due diligence process, engagement with employees, and commitment to social excellence in the supply chain. However, specific information on identified cases of severe human rights incidents and the reconciliation of fines or penalties related to those incidents is lacking. Overall, Schneider Electric's disclosure is comprehensive but could benefit from more specific information on incidents and reconciliations.",
+      "SCORE": 90
+    },
+    "S1_D": {
+      "ANALYSIS": "The disclosure provided by the company partially meets the requirements for engagement with its workers and workers' representatives. The company describes various engagement initiatives and communication channels, including dialogue with representatives. However, specific details on frequency, effectiveness assessment, engagement with vulnerable groups, and setting targets with workers' input are lacking. While some aspects are addressed, more comprehensive information is needed to fully meet the disclosure requirements.",
+      "SCORE": 65
+    },
+    "S1_E": {
+      "ANALYSIS": "The disclosure provided by Schneider Electric extensively covers its policies and actions related to preventing discrimination and promoting diversity and inclusion in its workforce. It addresses specific policies, commitments for vulnerable groups, implementation procedures, and monitoring mechanisms. The disclosure also includes targets for gender diversity and initiatives for promoting diversity. However, there is limited information on fines, penalties, or compensation related to discrimination incidents, which could enhance the completeness of the disclosure.",
+      "SCORE": 90
+    },
+    "S1_F": {
+      "ANALYSIS": "The disclosure provided in the sustainability report partially addresses the requirements for remediation of negative impacts and channels for own workforce to raise concerns. The report mentions some actions taken, channels available, and monitoring processes, but lacks specific details on grievance mechanisms, protection against retaliation, and effectiveness assessment of the channels. While there are mentions of engagement with workers, more clarity on the actual processes and policies is needed to fully meet the disclosure requirements.",
+      "SCORE": 65
+    },
+    "S1_G": {
+      "ANALYSIS": "The disclosure provided in the sustainability report partially addresses the requirement related to social protection for the company's workforce. While the report mentions initiatives such as the Global Family Leave Policy, Employee Assistance Program, and healthcare coverage, it lacks explicit details on the coverage of social protection against major life events for all employees. The report does not clearly demonstrate whether all employees are safeguarded by social protection as outlined in the requirements.",
+      "SCORE": 60
+    }
+  }
+]
