@@ -1,4 +1,31 @@
 #### PROMPTS adjusted to ESRS and not used so far
+PROMPTS = {
+    # Ni et al. 2023: 'tcfd_qa_source'
+    'summary_with_source': """As a senior equity analyst with expertise in sustainability reporting evaluating a company's annual report, you are presented with the following background information:
+
+{basic_info}
+
+With the above information and the following extracted components (which may have incomplete sentences at the beginnings and the ends) of the annual report at hand, please respond to the posed question, ensuring to reference the relevant parts ("SOURCES").
+Format your answer in JSON format with the two keys: ANSWER (this should contain your answer string without sources), and SOURCES (this should be a list of the source numbers that were referenced in your answer).
+
+QUESTION: {question}
+=========
+{summaries}
+=========
+
+Please adhere to the following guidelines in your answer:
+1. Your response must be precise, thorough, and grounded on specific extracts from the report to verify its authenticity.
+2. If you are unsure, simply acknowledge the lack of knowledge, rather than fabricating an answer.
+3. Keep your ANSWER within {answer_length} words.
+4. Be skeptical to the information disclosed in the report as there might be greenwashing (exaggerating the firm's corporate social responsibility). Always answer in a critical tone.
+5. Cheap talks are statements that are costless to make and may not necessarily reflect the true intentions or future actions of the company. Be critical for all cheap talks you discovered in the report.
+6. Always acknowledge that the information provided is representing the company's view based on its report.
+7. Scrutinize whether the report is grounded in quantifiable, concrete data or vague, unverifiable statements, and communicate your findings.
+
+Your FINAL_ANSWER in JSON (ensure there's no format error):
+""",
+}
+
 PROMPTS  = {
         'esrs_summary_source': """Your task is to analyze and summarize any disclosures related to the following <CRITICAL_ELEMENT> in a company's annual report:
 
@@ -51,6 +78,126 @@ Statement: {statement}"""
 # """,
 }
 
+
+async def get_basic_info(report_list, section_text_dict):
+    all_answers = []
+    basic_info_answers = [] # new
+
+    for report_index, report in enumerate(report_list):
+
+        # Extract the basic information from the report
+        basic_info_prompt = PromptTemplate(template=prompts['general'], input_variables=['context'])
+        if "turbo" in llm_name:
+            message =[
+                SystemMessage(content=SYSTEM_PROMPT),
+                HumanMessage(content=basic_info_prompt.format(
+                    context = _docs_to_string(section_text_dict[report]['general'], with_source=False)))
+            ]
+            llm = ChatOpenAI(temperature=0, max_tokens=256)
+            output_text = llm(message).content
+        else:
+            message = basic_info_prompt.format(
+                context=_docs_to_string(report.section_text_dict['general'], with_source=False))
+            llm = ChatOpenAI(temperature=0, max_tokens=256)
+            output_text = llm(message)
+        print(output_text)
+        try:
+            basic_info_dict = json.loads(output_text)
+        except ValueError as e:
+            basic_info_dict = {'COMPANY_NAME': _find_answer(output_text, name='COMPANY_NAME'),
+                                'COMPANY_SECTOR': _find_answer(output_text, name='COMPANY_SECTOR'),
+                                'COMPANY_LOCATION': _find_answer(output_text, name='COMPANY_LOCATION')}
+        basic_info_answers.append(basic_info_dict)
+        
+        basic_info_string = """Company name: {name}\nCompany sector: {sector}\nCompany Location: {location}""" \
+            .format(name=basic_info_dict['COMPANY_NAME'], sector=basic_info_dict['COMPANY_SECTOR'],
+                    location=basic_info_dict['COMPANY_LOCATION'])   
+
+        # 2. Generate answers
+        esrs_questions = {k: v for k, v in queries.items() if 'S1' in k}
+        esrs_prompt = PromptTemplate(template=prompts[qa_prompt],
+                                     input_variables=['basic_info', 'summaries', 'question',
+                                                      'answer_length'])
+        #answers = {} #NEU
+        messages = []
+        keys = []
+        for k, q in esrs_questions.items():
+            num_docs = 20
+            summaries = _docs_to_string(section_text_dict[report][k], num_docs=num_docs)
+            current_prompt = esrs_prompt.format(basic_info=basic_info_string,
+                                                summaries=summaries,
+                                                question=q,
+                                                answer_length=answer_length)
+            if '16k' not in llm_name:
+                while len(tiktoken_encoder.encode(current_prompt)) > 3500 and num_docs > 10:
+                    num_docs -= 1
+                    summaries = _docs_to_string(section_text_dict[report][k], num_docs=num_docs)
+                    current_prompt = esrs_prompt.format(basic_info=basic_info_string,
+                                                        summaries=summaries,
+                                                        question=q,
+                                                        answer_length=answer_length)
+            if "turbo" in llm_name:
+                message = [
+                    SystemMessage(content=SYSTEM_PROMPT),
+                    HumanMessage(content=current_prompt)
+                ]
+            else:
+                message = current_prompt
+            keys.append(k)
+            messages.append(message)
+        
+        if "turbo" in llm_name:
+            llm = ChatOpenAI(temperature=0, max_tokens=512)
+            outputs = await llm.agenerate(messages) #NEU
+            output_text = {k: g[0].text for k, g in zip(keys, outputs.generations)} #NEU
+        else:
+            llm = ChatOpenAI(temperature=0, max_tokens=512)
+            output_text = {} #NEU
+            for k, message in zip(keys, messages): #NEU
+                output_text[k] = llm(message) #NEU
+        #outputs = await llm.agenerate(messages)
+        #output_text = {k: g[0].text for k, g in zip(keys, outputs.generations)}
+
+        # 3. Process the answers
+        report_answers = {} #NEU
+        for k, text in output_text.items():
+            try:
+                report_answers[k] = json.loads(text)
+                if 'SOURCES' not in report_answers[k].keys() or answer_key_name not in report_answers[k]:
+                    raise ValueError("Key name(s) not defined!")
+            except Exception:
+                report_answers[k] = {
+                    answer_key_name: _find_answer(text, name=answer_key_name),
+                    'SOURCES': _find_sources(text)
+                }
+            
+            report_answers[k][answer_key_name] = remove_brackets(report_answers[k][answer_key_name])
+            print(report_answers[k])
+        
+        all_answers.append({
+            'report': report,
+            'basic_info': basic_info_dict,
+            'answers': report_answers
+
+        })
+    
+    return all_answers
+        
+        #     except ValueError as e:
+        #         answers[k] = {answer_key_name: _find_answer(text, name=answer_key_name),
+        #                       'SOURCES': _find_sources(text)}
+        #     page_source = []
+        #     for s in answers[k]['SOURCES']:
+        #         try:
+        #             page_source.append(report.page_idx[s])
+        #         except Exception as e:
+        #             pass
+        #         answers[k]['PAGE'] = list(set(page_source))
+        #         answers[k][answer_key_name] = remove_brackets(answers[k][answer_key_name])
+        #         print(answers[k])
+        # answers.append(answers)
+
+        # return answers
 
 
 
