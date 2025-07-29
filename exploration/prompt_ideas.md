@@ -22,6 +22,23 @@ QUESTIONS:
 =========
 Your FINAL_ANSWER in JSON (ensure there's no format error):"""
 
+2. Colesanti Senni et al., 2025
+You are tasked with the role of a climate scientist, assigned to analyze a company's sustainability report. Based on the following extracted parts from the sustainability report, answer the given QUESTIONS.
+If you don't know the answer, just say that you don't know by answering "NA". Don't try to make up an answer.
+
+Given are the following sources:
+--------------------- [BEGIN OF SOURCES]\n
+{sources}\n
+--------------------- [END OF SOURCES]\n
+
+QUESTIONS:
+1. What is the company of the report?
+2. What sector does the company belong to?
+3. Where is the company located?
+
+Format your answers in JSON format with the following keys: COMPANY_NAME and COMPANY_SECTOR COMPANY_LOCATION.
+Your FINAL_ANSWER in JSON (ensure there's no format error):
+
 ## Guidlines for the answer
         1. (CHATREPORT):
 Please adhere to the following guidelines in your answer:
@@ -149,3 +166,7 @@ Your summarization should be formatted in JSON with two keys:
 2. SOURCES: This should be a list of the source numbers that were referenced in your summary.
 
 Your FINAL_ANSWER in JSON (ensure there's no format error):
+
+
+## System Prompt
+You are a senior researcher who specializes in extracting numeric data points from corporate reports to meet the European Sustainability Reporting Standards (ESRS).
