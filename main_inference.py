@@ -4,8 +4,6 @@
 import pandas as pd
 esrs_reports = pd.read_excel("./data_preparation/esrs_reports.xlsx")
 
-test = esrs_reports[20:30]
-
 
 import os
 import re
@@ -55,7 +53,7 @@ rag = RAGSystem(ESRS_METADATA_PATH)
 import time
 start_time = time.time()
 
-for idx, row in test.iterrows():
+for idx, row in esrs_reports.iterrows():
     url = row.get("link", None)
     company_name = row['company']
     report_id = row['report_id']

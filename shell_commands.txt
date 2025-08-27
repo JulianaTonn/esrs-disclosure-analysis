@@ -4,6 +4,19 @@ pip freeze > requirements.txt ### actualize the requirements file
 pip install -r requirements.txt ### keeping the environment updated
 watch -n 0.5 nvidia-smi ### show memory usage, GPU utilization and temperature of GPU
 
+### working with slurm
+# 1.
+module load devel/python/3.13 
+#2. 
+source ~/thesis/myEnv_thesis_313/bin/activate
+
+sbatch run_inference.sh # submit the job
+squeue # monitor if queued or running 
+tail -f logs/<job-name>-<jobid>.out
+seff <jobid> # monitor after completion
+
+
+
 ### working with git
 # working with files
 git status               # Check status of working directory
