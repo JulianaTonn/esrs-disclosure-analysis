@@ -17,11 +17,14 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 
 # --- Helper Functions ---
 
-def _docs_to_string(docs):
+def _docs_to_string(docs, with_source=True):
     """Formats a list of LangChain Documents into a string for the prompt."""
     output = ""
-    for i, doc in enumerate(docs):
-        output += f"Source {i+1}:\nContent: {doc.page_content}\nPage: {doc.metadata.get('page', 'N/A')}\n---\n"
+    for doc in docs:
+        output += "Content: {}\n".format(doc.page_content)
+        if with_source:
+            output += "Source: {}\n".format(doc.metadata['page'])
+        output += "\n---\n"
     return output
 
 def _find_verdict(answer_text):
@@ -282,7 +285,7 @@ Your FINAL_ANSWER in JSON (ensure there's no format error):
         prompts, metadata, final_results = self._prepare_prompts(report_id, retrieved_chunks)
         
         if prompts:
-            print(f"Starting augmented generation for {len(prompts} Prompts...")
+            print(f"Starting augmented generation for {len(prompts)} Prompts...")
             responses = self.generate_text_pipeline(prompts)
         else:
             responses = []
