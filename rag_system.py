@@ -175,7 +175,7 @@ Your FINAL_ANSWER in JSON (ensure there's no format error):
         if path:
             pdf = pymupdf.open(path)
         else:
-            response = requests.get(url)
+            response = requests.get(url, timeout=60) #if it takes longer than 1 min to read the url raises an error
             pdf = pymupdf.open(stream=io.BytesIO(response.content), filetype='pdf')
         pages = [page.get_text() for page in pdf]
         return pages
@@ -277,8 +277,10 @@ Your FINAL_ANSWER in JSON (ensure there's no format error):
             pages = self._parse_pdf(path=pdf_path, url=pdf_url)
             chunks, metadata = self._chunk_text(pages)
             vectorstore = self._get_vectorstore(chunks, metadata, db_path)
+            print("Create vectorestore at", db_path)
         else:
             vectorstore = self._get_vectorstore(None, None, db_path)
+            print("Load existing DB from", db_path)
         
         # 2. Retrieve, Prepare, Infer, and Parse
         retrieved_chunks = self._retrieve_chunks(vectorstore, report_id)

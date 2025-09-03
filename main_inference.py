@@ -3,6 +3,7 @@
 ### Load Metadata of Reports to be analyzed
 import pandas as pd
 esrs_reports = pd.read_excel("./data_preparation/esrs_reports.xlsx")
+esrs_reports = esrs_reports[99:]
 
 
 import os
@@ -50,9 +51,6 @@ rag = RAGSystem(ESRS_METADATA_PATH)
 # ----------------------------
 # 3) Process each report URL
 # ----------------------------
-import time
-start_time = time.time()
-
 for idx, row in esrs_reports.iterrows():
     url = row.get("link", None)
     company_name = row['company']
@@ -92,6 +90,3 @@ for idx, row in esrs_reports.iterrows():
         # also log failure in skipped_reports.csv
         row.to_frame().T.to_csv(SKIPPED_PATH, mode="a", header=False, index=False)
 
-
-time = (time.time() - start_time)/ 60
-print(time, "minutes needed for 5 reports")
