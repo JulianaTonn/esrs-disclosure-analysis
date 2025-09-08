@@ -15,10 +15,10 @@ performance_evaluation/faiss_db_*/
 faiss_dbs/
 
 # Ignore data from LSEG
-data_preparation/lseg_data.xlsx
+data/lseg_*
 
 # Ignore downloaded data from natural earth
-data_preparation/earth/*
+data/earth/*
 
 # Ignore slurm job information
 logs/
