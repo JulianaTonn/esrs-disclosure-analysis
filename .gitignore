@@ -17,6 +17,9 @@ faiss_dbs/
 # Ignore data from LSEG
 data/lseg_*
 
+# Ignore temporary excel files
+data/*.xlsx
+
 # Ignore downloaded data from natural earth
 data/earth/*
 
