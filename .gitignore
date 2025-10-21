@@ -10,6 +10,9 @@ __pycache__/
 myEnv/
 .venv/
 
+# Ignore shell command file
+shell_commands.txt
+
 # Ignore FAISS databases
 performance_evaluation/faiss_db_*/
 faiss_dbs/
@@ -18,7 +21,8 @@ faiss_dbs/
 data/lseg_*
 
 # Ignore temporary excel files
-data/*.xlsx
+data/esrs_reports.xlsx
+data/srn_reports.xlsx
 
 # Ignore downloaded data from natural earth
 data/earth/*
@@ -26,3 +30,6 @@ data/earth/*
 # Ignore slurm job information
 logs/
 *.sh
+
+# Ignore skipped_reports
+skipped_reports/*
