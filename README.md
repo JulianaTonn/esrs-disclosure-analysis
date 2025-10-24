@@ -1,40 +1,39 @@
 # ESRS Disclosure Analysis using Retrieval-Augmented Generation (RAG)
 
-This repository contains the code, data, and documentation accompanying the master’s thesis **"Automating the Assessment of Corporate Sustainability Disclosures under the CSRD using Large Language Models"** by **Juliana Tonn**.
+This repository contains the code, data, and documentation accompanying the master’s thesis **"Automating the Assessment of Corporate Sustainability Disclosures under the CSRD using Large Language Models"** by Juliana Tonn. Handed in for the Master Examination in Data Science in Business and Economics of the Eberhard Karls Universität Tübingen.
 
 The project develops an **open-source Retrieval-Augmented Generation (RAG) framework** to automatically extract and evaluate sustainability disclosures in accordance with the **European Sustainability Reporting Standards (ESRS)** — specifically focusing on **ESRS S1 Own Workforce** indicators.  
 It provides the first large-scale, automated analysis of early CSRD-aligned sustainability reports.
 
----
-
-## Overview
-
-Corporate sustainability reports are growing in complexity and scope under the new **Corporate Sustainability Reporting Directive (CSRD)**.  
-Traditional manual analysis of ESG disclosures is time-consuming and inconsistent. This project explores how **Large Language Models (LLMs)** — enhanced through **Retrieval-Augmented Generation (RAG)** — can automate and scale the evaluation of qualitative sustainability disclosures.
-
-The framework achieves an **accuracy of 76.9%** in detecting ESRS-aligned disclosures and demonstrates that **lightweight, open-source LLMs** can deliver competitive results when properly configured for domain-specific ESG tasks.
-
----
 
 ## RAG Pipeline
 
 The RAG system retrieves relevant text sections from corporate sustainability reports and evaluates whether the disclosed content aligns with ESRS S1 requirements.
 
 <p align="center">
-  <img src="thesis/rag_pipeline.png" alt="RAG Pipeline" width="700"/>
+  <img src="data/rag_pipeline.png" alt="RAG Pipeline" width="700"/>
 </p>
 
-### Key Components
-- **Retrieval**: Extracts context passages from PDF sustainability reports.
-- **Augmentation**: Supplies relevant external ESRS metadata for grounding.
-- **Generation**: Uses an LLM to assess disclosure compliance.
-- **Evaluation**: Measures accuracy and coverage using a manually coded validation dataset.
+## Directories
+- **rag_system.py**: 
+- **EsrsMetadata.xlsx**: 
+- **main_inference.py**: the script to run the automated disclosure analysis
 
----
+- performance_evaluation:
+  - validation_dataset.xslx: hand-coded validation set
+  - sample_reports/*: containing the two sample reports the validation set was based upon
+  - prompt_exploration.ipynb: exploration of the performance of different prompt templates, system prompts, queries & guidelines
+  - rag_comparison.ipynb: compare performance of different rag system settings (model benchmarking, prompt modules, PDF text extraction, retrieval settings)
 
-## Running the Inference
+- data:
+  - get_reports.ipynb: prepare dataset with reports and links that is used for inference
+  - SRN-CSRD_report_archive - csrd.csv: downloaded esrs conform report dataset from SRN
+  - all_results.jsonl: inference results
+  - visualize_data.ipynb: prepare company data and inference results for the analysis (plots, summary statistics)
 
-To perform automated disclosure analysis, use:
+## Acknowledgements
+The author acknowledges support by the state of Baden-Württemberg through bwHPC and the German Research Foundation (DFG) through grant INST 35/1597-1 FUGG for providing computational resources.
 
-```bash
-python main_inference.py
+--- 
+## Contact
+For questions, feedback, or collaborations please reach out juliana.tonn@student.uni-tuebingen.de.
